@@ -1,0 +1,25 @@
+<!--
+    This component is used to create Mentor Tile.
+    using this for Manager Flow
+-->
+<template>
+    <template if:true={mentorRecord}>
+        <lightning-card>
+            <center>
+            <div class="slds-var-m-around_small">
+                <p>
+                    <img src={pictureUrl} style=" width: 100px;height: 100px;border-radius: 50%;"/>
+                </p>
+                <p>
+                
+                <strong>Name :</strong> {mentorRecord.Name} </br>
+                </p>
+                <br>
+                <p class="slds-var-m-around_small">
+                    <lightning-button label="View Employees" variant="brand" alternative-text="Open record" onclick={handleOpenRecord}></lightning-button>
+                </p>
+            </div>
+            </center>
+        </lightning-card>
+    </template>
+</template>

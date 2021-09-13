@@ -1,0 +1,67 @@
+<!--
+This component is used to show the list of tasks assigned to the logged in user.
+using this for Employee Flow
+-->
+<template>
+<template if:true={show}>
+    <lightning-card>
+        <table>
+        <tr>
+            <th>Task</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <template for:each={assignedTask} for:item="task">
+            <tr key={task.Id}>
+            <td>{task.Name}</td>
+            <td>{task.Onboarding_Step__r.Name}</td>
+            <td>{task.Start_Date__c}</td>
+            <td>{task.Due_Date__c}</td>
+            <td>{task.Status__c}</td>
+            <td><lightning-button variant="Base" label="Edit" onclick={showTaskDetail} value={task.Id}></lightning-button></td>
+            </tr>
+        </template>
+        </table>
+    </lightning-card> 
+</template>
+    <!--- Modal Popup for New Task-->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit Task</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <div class="slds-m-around_medium">
+                    <lightning-record-edit-form object-api-name="User_Assigned_Task__c" record-id={taskrecid} onsuccess={handleSuccess}>
+                        <lightning-messages>
+                        </lightning-messages>
+                        <lightning-input-field field-name="Name" disabled></lightning-input-field>
+                        <lightning-input-field field-name="Start_Date__c" disabled></lightning-input-field>
+                        <lightning-input-field field-name="Due_Date__c" disabled></lightning-input-field>
+                        <lightning-input-field field-name="Status__c" ></lightning-input-field>
+                        <lightning-input-field field-name="Onboarding_Step__c" disabled></lightning-input-field>
+                            <lightning-button
+                                class="slds-m-top_small"
+                                type="submit"
+                                variant="brand"
+                                label="Save">
+                            </lightning-button>
+                    </lightning-record-edit-form>
+                </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+</template>

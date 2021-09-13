@@ -1,0 +1,18 @@
+<!--
+    This component is used to close onboarding task.
+    using this for Manager Flow
+-->
+<template>
+    <lightning-card>
+            <div class="slds-m-around_small">
+                <template if:true={user}>
+                    <lightning-record-edit-form object-api-name={objectApiName} onsubmit={handleSubmit} 
+                                                onsuccess={handleSuccess} record-id={recordId}>
+                        <lightning-input-field field-name="Status__c" value={user.Status__c}></lightning-input-field>
+
+                        <lightning-button type="submit" variant="brand" label="Update" ></lightning-button>
+                    </lightning-record-edit-form>
+                </template>
+            </div>
+    </lightning-card>
+</template>

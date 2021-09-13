@@ -1,0 +1,60 @@
+<!--
+    This component is used as container to assemble all the components used for mentor flow.
+    using this for  mentor Flow
+-->
+<template>
+<template if:true={showaddstep}>
+    <lightning-card>
+        <lightning-button style="float: right;" label="Add Onboarding Step" variant="Brand"  onclick={openModal} slot="actions" class="slds-m-left_x-small"></lightning-button>
+    </lightning-card>
+</template>
+
+<lightning-card>
+<div class="row">
+    <div class="column">
+        <template if:true={employeeRecords}>
+            <div class="slds-grid slds-wrap">
+            <template for:each={employeeRecords} for:item="item">
+                            <div class="slds-p-top_x-small" key={item.Id} style="margin-right: 40px;">
+                                <c-employee-t employee-record={item} onemployeeview={handleEmployeeView}></c-employee-t>
+                            </div>
+                </template>
+            </div>
+        </template>
+    </div>
+    <div class="column">
+        <template if:true={showAssignedTask}>
+            <c-assigned-task-list empuserid={userid}></c-assigned-task-list>
+        </template>
+    </div>
+  </div>
+</lightning-card> 
+<template if:true={isModalOpen}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Onboarding Step</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <div class="slds-m-around_medium">
+                <lightning-record-form       
+                object-api-name="Onboarding_Steps__c"
+                layout-type="Full"
+                columns="2"
+                mode="edit"
+                onsuccess={handleSuccess}></lightning-record-form>         
+             </div>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template> 
+<!----New Task Modal Ends--> 
+</template>

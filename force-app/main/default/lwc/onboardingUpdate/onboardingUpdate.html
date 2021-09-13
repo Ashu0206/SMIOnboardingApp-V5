@@ -1,0 +1,19 @@
+<!--
+    This component is used to extend onboarding task.
+    using this for Manager Flow
+-->
+<template>
+    <lightning-card>
+            <div class="slds-m-around_small">
+                <template if:true={user}>
+                    <lightning-record-edit-form object-api-name={objectApiName} onsubmit={handleSubmit} 
+                                                onsuccess={handleSuccess} record-id={recordId}>
+                        <lightning-input-field field-name="Onboarding_End_Date__c" value={user.Onboarding_End_Date__c}></lightning-input-field>
+                        <lightning-input-field field-name="Reason_For_Extending__c" value={user.Reason_For_Extending__c}></lightning-input-field>
+
+                        <lightning-button type="submit" variant="brand" label="Update" ></lightning-button>
+                    </lightning-record-edit-form>
+                </template>
+            </div>
+    </lightning-card>
+</template>

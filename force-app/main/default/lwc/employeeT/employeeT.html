@@ -1,0 +1,23 @@
+<!--
+    This component is used to create Employee Tile.
+    using this for Manager and Mentor Flow
+-->
+<template>
+    <template if:true={employeeRecord}>
+        <lightning-card>
+            <center>
+            <div class="slds-var-m-around_small">
+                <p>
+                    <img src={pictureUrl} style=" width: 100px;height: 100px;border-radius: 50%;"/>
+                </p>
+                <p>
+                <strong>{employeeRecord.Name}</strong> </br>
+                </p>
+                <p class="slds-var-m-around_small">
+                    <lightning-button label="View Progress" variant="brand" alternative-text="Open record" onclick={handleOpenRecordClick}></lightning-button>
+                </p>
+            </div>
+        </center>
+        </lightning-card>
+    </template>
+</template>

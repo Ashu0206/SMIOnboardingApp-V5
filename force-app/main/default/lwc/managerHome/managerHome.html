@@ -1,0 +1,69 @@
+<!--
+    This component is used as container to assemble all the components used for manager flow.
+    using this for  manager Flow
+-->
+<template>
+    <template if:true={showMentors}>
+    <lightning-card>
+        <lightning-tabset>
+            <lightning-tab label="Mentors And Employees">
+                <div class="slds-m-around_small">
+                    <div>
+                        </div>
+                            <div>
+                            <template if:true={mentorRecords}>
+                                <div class="slds-grid slds-wrap">
+                                <template for:each={mentorRecords} for:item="item">
+                                        <div class="slds-col slds-size_1-of-3" key={item.Id}>
+                                            <div class="slds-p-right_x-small">
+                                                <div class="slds-p-top_x-small">
+                                                    <c-mentor-tile mentor-record={item} onmentorview={handleMentorView}></c-mentor-tile>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                        </template>
+                    </div>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="User Enrollment">
+                <lightning-card title="User Enrollment" icon-name="custom:custom53">
+                <c-enroll-user></c-enroll-user>
+                </lightning-card>
+            </lightning-tab>
+            <lightning-tab label="Onboarding Step">
+                <lightning-card title="Onboarding Step"
+                icon-name="custom:custom53">
+                <div class="slds-m-around_small">
+                    <lightning-record-form       
+                        object-api-name={objectApiRef}
+                        layout-type="Full"
+                        columns="2"
+                        mode="edit"
+                        onsuccess={handleSuccess}>
+                    </lightning-record-form>
+                </div>
+                </lightning-card>
+            </lightning-tab>
+            <lightning-tab label="Assign Task">
+                <lightning-card title="Assign Task"
+                icon-name="custom:custom53">
+                <div class="slds-m-around_small">
+                    <lightning-record-form       
+                        object-api-name={objectApi}
+                        layout-type="Full"
+                        columns="2"
+                        mode="edit"
+                        onsuccess={handleSuccess}>
+                    </lightning-record-form>
+                </div>
+                </lightning-card>
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
+    </template>
+    <template if:true={mentorid}>
+        <c-mentor-home mentorid={mentorid}></c-mentor-home>
+    </template>
+</template>
